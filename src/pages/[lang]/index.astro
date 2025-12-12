@@ -6,7 +6,8 @@ import type { Lang } from "../../data/site";
 
 export const getStaticPaths = () => getLangPaths();
 
-const { lang } = Astro.params as { lang: Lang };
+import { SITE } from "../../data/site";
+const lang = ((Astro.params?.lang as Lang) ?? SITE.defaultLang);
 ---
 
 <BaseLayout lang={lang} title={t(lang, "nav.home")}>
