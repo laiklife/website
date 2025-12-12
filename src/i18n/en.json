@@ -1,0 +1,19 @@
+{
+  "nav.home": "Home",
+  "nav.gallery": "Gallery",
+  "nav.about": "About",
+  "nav.contact": "Contact",
+  "home.title": "Photography for moments that last.",
+  "home.subtitle": "Nature, city, portrait & black and white — captured with a modern, clean aesthetic.",
+  "home.cta": "View Gallery",
+  "gallery.title": "Gallery",
+  "gallery.filter.all": "All",
+  "about.title": "About",
+  "about.body": "Write your story here. Keep it short, personal, and focused on your style.",
+  "contact.title": "Contact",
+  "contact.subtitle": "Send me a message — I’ll reply as soon as possible.",
+  "contact.name": "Name",
+  "contact.email": "Email",
+  "contact.message": "Message",
+  "contact.send": "Send"
+}
