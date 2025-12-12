@@ -1,0 +1,23 @@
+{
+  "nav.home": "Start",
+  "nav.gallery": "Galerie",
+  "nav.about": "Über mich",
+  "nav.contact": "Kontakt",
+
+  "home.title": "Fotografie für Momente, die bleiben.",
+  "home.subtitle": "Natur, Stadt, Portrait & Schwarzweiß — modern und clean festgehalten.",
+  "home.cta": "Zur Galerie",
+
+  "gallery.title": "Galerie",
+  "gallery.filter.all": "Alle",
+
+  "about.title": "Über mich",
+  "about.body": "Schreibe hier deine Geschichte. Kurz, persönlich und passend zu deinem Stil.",
+
+  "contact.title": "Kontakt",
+  "contact.subtitle": "Schreib mir eine Nachricht — ich antworte so schnell wie möglich.",
+  "contact.name": "Name",
+  "contact.email": "E-Mail",
+  "contact.message": "Nachricht",
+  "contact.send": "Senden"
+}

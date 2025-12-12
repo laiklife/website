@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import { getLangPaths } from "../../i18n/routes";
+import type { Lang } from "../../data/site";
+
+export const getStaticPaths = () => getLangPaths();
+const { lang } = Astro.params as { lang: Lang };
+---
+
+<BaseLayout lang={lang} title={t(lang, "nav.about")}>
+  <section class="hero" data-reveal>
+    <h1 class="h1">{t(lang, "about.title")}</h1>
+    <p class="p">{t(lang, "about.body")}</p>
+  </section>
+</BaseLayout>

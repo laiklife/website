@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import { getLangPaths } from "../../i18n/routes";
+import type { Lang } from "../../data/site";
+import { SITE } from "../../data/site";
+
+export const getStaticPaths = () => getLangPaths();
+const { lang } = Astro.params as { lang: Lang };
+---
+
+<BaseLayout lang={lang} title={t(lang, "nav.contact")}>
+  <section class="hero" data-reveal>
+    <h1 class="h1">{t(lang, "contact.title")}</h1>
+    <p class="p">{t(lang, "contact.subtitle")}</p>
+  </section>
+
+  <section class="card" style="padding:18px;" data-reveal>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <p style="display:none;">
+        <label>Don’t fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <div class="field">
+        <label>{t(lang, "contact.name")}</label>
+        <input name="name" required />
+      </div>
+
+      <div class="field">
+        <label>{t(lang, "contact.email")}</label>
+        <input name="email" type="email" required />
+      </div>
+
+      <div class="field">
+        <label>{t(lang, "contact.message")}</label>
+        <textarea name="message" rows="6" required></textarea>
+      </div>
+
+      <button class="btn" type="submit">{t(lang, "contact.send")}</button>
+    </form>
+
+    <p class="p" style="margin-top:14px;">
+      Prefer email? <a href={`mailto:${SITE.email}`} style="text-decoration:underline;">{SITE.email}</a>
+    </p>
+  </section>
+
+  <style>
+    .field{ display:grid; gap:8px; margin-bottom:14px; }
+    label{ color: var(--muted); font-size: 14px; }
+    input, textarea{
+      border:1px solid var(--border);
+      background: color-mix(in srgb, var(--card) 80%, transparent);
+      border-radius: 14px;
+      padding: 12px 12px;
+      color: var(--text);
+      outline: none;
+    }
+    input:focus, textarea:focus{ box-shadow: 0 0 0 4px rgba(99,102,241,0.18); }
+  </style>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import type { Lang } from "../data/site";
+const { lang } = Astro.props as { lang: Lang };
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="muted">© {year} Laiklife</div>
+    <div class="muted">/{lang}</div>
+  </div>
+</footer>

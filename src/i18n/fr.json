@@ -1,0 +1,23 @@
+{
+  "nav.home": "Accueil",
+  "nav.gallery": "Galerie",
+  "nav.about": "À propos",
+  "nav.contact": "Contact",
+
+  "home.title": "Photographie pour des moments qui durent.",
+  "home.subtitle": "Nature, ville, portrait & noir et blanc — un style moderne et épuré.",
+  "home.cta": "Voir la galerie",
+
+  "gallery.title": "Galerie",
+  "gallery.filter.all": "Tout",
+
+  "about.title": "À propos",
+  "about.body": "Écris ton histoire ici. Courte, personnelle et centrée sur ton style.",
+
+  "contact.title": "Contact",
+  "contact.subtitle": "Envoie-moi un message — je répondrai dès que possible.",
+  "contact.name": "Nom",
+  "contact.email": "Email",
+  "contact.message": "Message",
+  "contact.send": "Envoyer"
+}

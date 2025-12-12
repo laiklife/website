@@ -1,0 +1,32 @@
+---
+import { SITE, type Lang } from "../data/site";
+const { lang } = Astro.props as { lang: Lang };
+const langs = SITE.languages;
+---
+
+<select class="lang" aria-label="Language" id="langSelect">
+  {langs.map((l) => (
+    <option value={l} selected={l === lang}>{l.toUpperCase()}</option>
+  ))}
+</select>
+
+<script>
+  const el = document.getElementById("langSelect");
+  el?.addEventListener("change", (e) => {
+    const to = e.target.value;
+    const parts = window.location.pathname.split("/").filter(Boolean);
+    // /{lang}/...
+    parts[0] = to;
+    window.location.href = "/" + parts.join("/") + (window.location.pathname.endsWith("/") ? "/" : "");
+  });
+</script>
+
+<style>
+  .lang{
+    border:1px solid var(--border);
+    background: var(--card);
+    border-radius: 999px;
+    padding: 10px 12px;
+    color: var(--text);
+  }
+</style>

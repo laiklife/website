@@ -1,0 +1,27 @@
+---
+import { t } from "../i18n/i18n";
+import type { Lang } from "../data/site";
+import LanguageSelect from "./LanguageSelect.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const { lang } = Astro.props as { lang: Lang };
+const base = `/${lang}`;
+---
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href={`${base}/`}>Laiklife</a>
+
+    <nav class="links">
+      <a href={`${base}/`}>{t(lang, "nav.home")}</a>
+      <a href={`${base}/gallery`}>{t(lang, "nav.gallery")}</a>
+      <a href={`${base}/about`}>{t(lang, "nav.about")}</a>
+      <a href={`${base}/contact`}>{t(lang, "nav.contact")}</a>
+    </nav>
+
+    <div class="actions">
+      <LanguageSelect lang={lang} />
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

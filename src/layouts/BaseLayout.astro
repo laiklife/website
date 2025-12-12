@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { SITE, type Lang } from "../data/site";
+const { lang, title } = Astro.props as { lang: Lang; title: string };
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title} — {SITE.name}</title>
+    <meta name="description" content="Photography portfolio" />
+  </head>
+  <body>
+    <Navbar lang={lang} />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script type="module">
+      import { initTheme } from "../scripts/theme.ts";
+      import { initReveal } from "../scripts/reveal.ts";
+      import { enhanceViewTransitions } from "../scripts/viewtransitions.ts";
+      initTheme();
+      initReveal();
+      enhanceViewTransitions();
+    </script>
+  </body>
+</html>
