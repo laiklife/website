@@ -26,5 +26,20 @@
   "home.fastContact.title": "Schnellkontakt",
   "home.fastContact.body": "Wir verbinden das mit dem Kontaktformular.",
   "gallery.subtitle": "Nach Tags filtern und Bilder in der Lightbox öffnen.",
-  "contact.preferEmail": "Lieber per E-Mail?"
+  "contact.preferEmail": "Lieber per E-Mail?",
+
+  "footer.imprint": "Impressum",
+  "footer.instagram": "Instagram",
+
+  "imprint.title": "Impressum",
+  "imprint.intro": "Angaben gemäß § 5 TMG.",
+
+  "imprint.operator.title": "Betreiber",
+  "imprint.operator.body": "Laiklife Photography\nLaiquah P.\nParis\nFrankreich",
+
+  "imprint.contact.title": "Kontakt",
+  "imprint.contact.body": "E-Mail: hello@laiklife.fr",
+
+  "imprint.disclaimer.title": "Haftungsausschluss",
+  "imprint.disclaimer.body": "Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich."
 }

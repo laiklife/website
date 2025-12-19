@@ -1,3 +1,28 @@
-.footer { margin-top: 60px; padding: 30px 0 40px; border-top: 1px solid var(--border); }
-.footer-inner { display: flex; justify-content: space-between; gap: 10px; }
-.muted { color: var(--muted); }
+.footer {
+  margin-top: 60px;
+  padding: 30px 0 40px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}

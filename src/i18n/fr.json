@@ -26,5 +26,20 @@
   "home.fastContact.title": "Contact rapide",
   "home.fastContact.body": "On reliera ça au formulaire de contact.",
   "gallery.subtitle": "Filtre par tags et ouvre les images en plein écran.",
-  "contact.preferEmail": "Tu préfères l’e-mail ?"
+  "contact.preferEmail": "Tu préfères l’e-mail ?",
+
+  "footer.imprint": "Mentions légales",
+  "footer.instagram": "Instagram",
+
+  "imprint.title": "Mentions légales",
+  "imprint.intro": "Informations légales.",
+
+  "imprint.operator.title": "Éditeur",
+  "imprint.operator.body": "Laiklife Photography\nLaiquah P.\nParis\nFrance",
+
+  "imprint.contact.title": "Contact",
+  "imprint.contact.body": "Email : hello@laiklife.fr",
+
+  "imprint.disclaimer.title": "Responsabilité",
+  "imprint.disclaimer.body": "Malgré un contrôle attentif, nous déclinons toute responsabilité concernant le contenu des liens externes. Les opérateurs des pages liées sont seuls responsables de leur contenu."
 }

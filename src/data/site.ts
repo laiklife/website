@@ -5,8 +5,7 @@ export const SITE = {
   defaultLang: "fr",
   languages: ["fr", "en", "de"] as const,
   social: {
-    instagram: "", // optional
-    linkedin: "",
+    instagram: "https://instagram.com/laiklife",
   },
 };
 

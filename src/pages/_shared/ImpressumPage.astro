@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import type { Lang } from "../../data/site";
+
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<BaseLayout lang={lang} title={t(lang, "imprint.title")}>
+  <section class="hero reveal">
+    <h1 class="h1">{t(lang, "imprint.title")}</h1>
+    <p class="p">{t(lang, "imprint.intro")}</p>
+  </section>
+
+  <section class="card reveal" style="padding:18px;">
+    <h2 class="h2" style="margin-top:0;">{t(lang, "imprint.operator.title")}</h2>
+    <p class="p">{t(lang, "imprint.operator.body")}</p>
+
+    <h2 class="h2">{t(lang, "imprint.contact.title")}</h2>
+    <p class="p">{t(lang, "imprint.contact.body")}</p>
+
+    <h2 class="h2">{t(lang, "imprint.disclaimer.title")}</h2>
+    <p class="p">{t(lang, "imprint.disclaimer.body")}</p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,10 @@
+---
+import ImpressumPage from "../_shared/ImpressumPage.astro";
+import { getLangPaths, langFromPathname } from "../../i18n/routes";
+
+export const getStaticPaths = getLangPaths;
+export const prerender = true;
+
+const lang = langFromPathname(Astro.url.pathname);
+---
+<ImpressumPage lang={lang} />

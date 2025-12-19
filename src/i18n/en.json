@@ -13,7 +13,7 @@
 
   "about.title": "About",
   "about.body": "Write your story here. Keep it short, personal, and focused on your style.",
-  
+
   "contact.title": "Contact",
   "contact.subtitle": "Send me a message — I’ll reply as soon as possible.",
   "contact.name": "Name",
@@ -26,5 +26,20 @@
   "home.fastContact.title": "Fast contact",
   "home.fastContact.body": "We’ll connect this to the contact form.",
   "gallery.subtitle": "Filter by tags and open images in a lightbox.",
-  "contact.preferEmail": "Prefer email?"
+  "contact.preferEmail": "Prefer email?",
+
+  "footer.imprint": "Imprint",
+  "footer.instagram": "Instagram",
+
+  "imprint.title": "Imprint",
+  "imprint.intro": "Information in accordance with applicable law.",
+
+  "imprint.operator.title": "Operator",
+  "imprint.operator.body": "Laiklife Photography\nLaiquah P.\nParis\nFrance",
+
+  "imprint.contact.title": "Contact",
+  "imprint.contact.body": "Email: hello@laiklife.fr",
+
+  "imprint.disclaimer.title": "Disclaimer",
+  "imprint.disclaimer.body": "Despite careful control, we accept no liability for the content of external links. The operators of the linked pages are solely responsible for their content."
 }
