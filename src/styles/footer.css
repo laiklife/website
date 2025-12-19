@@ -26,3 +26,19 @@
 .footer-links a:hover {
   text-decoration: underline;
 }
+
+.icon-link {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-link:hover {
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.icon-link svg {
+  display: block;
+}
