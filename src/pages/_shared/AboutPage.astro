@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import type { Lang } from "../../data/site";
+
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<BaseLayout lang={lang} title={t(lang, "nav.about")}>
+  <section class="hero reveal">
+    <h1 class="h1">{t(lang, "about.title")}</h1>
+    <p class="p">{t(lang, "about.body")}</p>
+  </section>
+</BaseLayout>

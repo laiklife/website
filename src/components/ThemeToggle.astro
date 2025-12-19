@@ -1,12 +1,6 @@
-<button class="iconbtn" type="button" aria-label="Toggle theme" id="themeBtn">
-  ☾
+<button class="iconbtn" type="button" aria-label="Toggle theme" data-theme-toggle>
+  <span data-theme-icon>☾</span>
 </button>
-
-<script type="module">
-  import { toggleTheme } from "../scripts/theme.ts";
-  const btn = document.getElementById("themeBtn");
-  btn?.addEventListener("click", toggleTheme);
-</script>
 
 <style>
   .iconbtn{

@@ -44,3 +44,123 @@
 @media (max-width: 760px) {
   .links { display: none; }
 }
+
+/* Language dropdown (custom) */
+.langdd{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.langdd-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  border:1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 86%, transparent);
+  color: var(--text);
+  border-radius: 999px;
+
+  padding: 10px 12px;
+  cursor: pointer;
+
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.langdd-btn:hover{ transform: translateY(-1px); }
+
+.langdd-btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.18), var(--shadow);
+  border-color: rgba(99,102,241,0.35);
+}
+
+.langdd-code{
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 13px;
+}
+
+.langdd-chev{
+  color: var(--muted);
+  font-size: 12px;
+  transform: translateY(-1px);
+  transition: transform 160ms ease;
+}
+
+.langdd.is-open .langdd-chev{
+  transform: translateY(-1px) rotate(180deg);
+}
+
+.langdd-menu{
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  min-width: 220px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+
+  padding: 6px;
+
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.langdd.is-open .langdd-menu{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.langdd-item{
+  width: 100%;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+
+  border: 0;
+  background: transparent;
+  color: var(--text);
+
+  padding: 10px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align:left;
+
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.langdd-item:hover{
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  transform: translateY(-1px);
+}
+
+.langdd-item:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.18);
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+}
+
+.langdd-item.is-active{
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+}
+
+.langdd-label{
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.langdd-right{
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}

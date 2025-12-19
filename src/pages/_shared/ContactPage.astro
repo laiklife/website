@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import { SITE, type Lang } from "../../data/site";
+
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<BaseLayout lang={lang} title={t(lang, "nav.contact")}>
+  <section class="hero reveal">
+    <h1 class="h1">{t(lang, "contact.title")}</h1>
+    <p class="p">{t(lang, "contact.subtitle")}</p>
+  </section>
+
+  <section class="card reveal" style="padding:18px;">
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <p style="display:none;">
+        <label>Don’t fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <div class="field">
+        <label>{t(lang, "contact.name")}</label>
+        <input name="name" required />
+      </div>
+
+      <div class="field">
+        <label>{t(lang, "contact.email")}</label>
+        <input name="email" type="email" required />
+      </div>
+
+      <div class="field">
+        <label>{t(lang, "contact.message")}</label>
+        <textarea name="message" rows="6" required></textarea>
+      </div>
+
+      <button class="btn" type="submit">{t(lang, "contact.send")}</button>
+    </form>
+
+    <p class="p" style="margin-top:14px;">
+      {t(lang, "contact.preferEmail")}
+      <a href={`mailto:${SITE.email}`} style="text-decoration:underline;">
+        {SITE.email}
+      </a>
+    </p>
+  </section>
+</BaseLayout>

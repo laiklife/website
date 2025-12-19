@@ -1,11 +1,12 @@
 ---
 import { t } from "../i18n/i18n";
 import type { Lang } from "../data/site";
+import { basePath } from "../i18n/routes";
 import LanguageSelect from "./LanguageSelect.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
 const { lang } = Astro.props as { lang: Lang };
-const base = `/${lang}`;
+const base = basePath(lang); // "" for fr, "/en" for en, "/de" for de
 ---
 
 <header class="nav">
@@ -14,9 +15,9 @@ const base = `/${lang}`;
 
     <nav class="links">
       <a href={`${base}/`}>{t(lang, "nav.home")}</a>
-      <a href={`${base}/gallery`}>{t(lang, "nav.gallery")}</a>
-      <a href={`${base}/about`}>{t(lang, "nav.about")}</a>
-      <a href={`${base}/contact`}>{t(lang, "nav.contact")}</a>
+      <a href={`${base}/gallery/`}>{t(lang, "nav.gallery")}</a>
+      <a href={`${base}/about/`}>{t(lang, "nav.about")}</a>
+      <a href={`${base}/contact/`}>{t(lang, "nav.contact")}</a>
     </nav>
 
     <div class="actions">

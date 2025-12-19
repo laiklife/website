@@ -3,6 +3,10 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { SITE, type Lang } from "../data/site";
+
+// ✅ NEU:
+import clientScriptUrl from "../scripts/client.ts?url";
+
 const { lang, title } = Astro.props as { lang: Lang; title: string };
 ---
 
@@ -21,13 +25,11 @@ const { lang, title } = Astro.props as { lang: Lang; title: string };
     </main>
     <Footer lang={lang} />
 
-    <script type="module">
-      import { initTheme } from "../scripts/theme.ts";
-      import { initReveal } from "../scripts/reveal.ts";
-      import { enhanceViewTransitions } from "../scripts/viewtransitions.ts";
-      initTheme();
-      initReveal();
-      enhanceViewTransitions();
-    </script>
+    <!-- ✅ so wird client.ts wirklich im Browser geladen -->
+    <script type="module" src={clientScriptUrl}></script>
   </body>
+
+  <p style="position:fixed;bottom:12px;left:12px;z-index:9999;padding:6px 10px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:12px;">
+    DEBUG BaseLayout lang: {lang}
+  </p>
 </html>

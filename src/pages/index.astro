@@ -1,21 +1,5 @@
 ---
-import { SITE } from "../data/site";
+import HomePage from "./_shared/HomePage.astro";
+const lang = "fr";
 ---
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Redirecting…</title>
-  </head>
-  <body>
-    <script>
-      const supported = new Set(["en","de","fr"]);
-      const stored = localStorage.getItem("lang");
-      const nav = navigator.language?.slice(0,2).toLowerCase();
-      const lang = (stored && supported.has(stored)) ? stored : (supported.has(nav) ? nav : "en");
-      window.location.replace(`/${lang}/`);
-    </script>
-  </body>
-</html>
+<HomePage lang={lang} />

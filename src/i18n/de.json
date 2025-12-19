@@ -19,5 +19,12 @@
   "contact.name": "Name",
   "contact.email": "E-Mail",
   "contact.message": "Nachricht",
-  "contact.send": "Senden"
+  "contact.send": "Senden",
+
+  "home.selectedWork.title": "Auswahl",
+  "home.selectedWork.body": "Füge später 3–6 Highlight-Bilder hinzu.",
+  "home.fastContact.title": "Schnellkontakt",
+  "home.fastContact.body": "Wir verbinden das mit dem Kontaktformular.",
+  "gallery.subtitle": "Nach Tags filtern und Bilder in der Lightbox öffnen.",
+  "contact.preferEmail": "Lieber per E-Mail?"
 }

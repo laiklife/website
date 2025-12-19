@@ -19,5 +19,12 @@
   "contact.name": "Nom",
   "contact.email": "Email",
   "contact.message": "Message",
-  "contact.send": "Envoyer"
+  "contact.send": "Envoyer",
+
+  "home.selectedWork.title": "Sélection",
+  "home.selectedWork.body": "Ajoute 3–6 images mises en avant ici.",
+  "home.fastContact.title": "Contact rapide",
+  "home.fastContact.body": "On reliera ça au formulaire de contact.",
+  "gallery.subtitle": "Filtre par tags et ouvre les images en plein écran.",
+  "contact.preferEmail": "Tu préfères l’e-mail ?"
 }

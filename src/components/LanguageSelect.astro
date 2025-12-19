@@ -2,31 +2,131 @@
 import { SITE, type Lang } from "../data/site";
 const { lang } = Astro.props as { lang: Lang };
 const langs = SITE.languages;
+
+const labels: Record<Lang, string> = {
+  fr: "Français",
+  en: "English",
+  de: "Deutsch",
+};
 ---
 
-<select class="lang" aria-label="Language" id="langSelect">
-  {langs.map((l) => (
-    <option value={l} selected={l === lang}>{l.toUpperCase()}</option>
-  ))}
-</select>
+<div class="langdd" data-langdd>
+  <button
+    class="langdd-btn"
+    type="button"
+    aria-label="Language"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    data-langdd-btn
+  >
+    <span class="langdd-code">{lang.toUpperCase()}</span>
+    <span class="langdd-chev" aria-hidden="true">▾</span>
+  </button>
 
-<script>
-  const el = document.getElementById("langSelect");
-  el?.addEventListener("change", (e) => {
-    const to = e.target.value;
-    const parts = window.location.pathname.split("/").filter(Boolean);
-    // /{lang}/...
-    parts[0] = to;
-    window.location.href = "/" + parts.join("/") + (window.location.pathname.endsWith("/") ? "/" : "");
+  <div class="langdd-menu" role="listbox" aria-label="Select language" data-langdd-menu>
+    {langs.map((l) => (
+      <button
+        class={`langdd-item ${l === lang ? "is-active" : ""}`}
+        type="button"
+        role="option"
+        aria-selected={l === lang ? "true" : "false"}
+        data-lang={l}
+      >
+        <span class="langdd-label">{labels[l]}</span>
+        <span class="langdd-right">{l.toUpperCase()}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script type="module">
+  const wrap = document.querySelector("[data-langdd]");
+  const btn = wrap?.querySelector("[data-langdd-btn]");
+  const menu = wrap?.querySelector("[data-langdd-menu]");
+
+  function stripLeadingLang(pathname) {
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts[0] === "en" || parts[0] === "de" || parts[0] === "fr") parts.shift();
+    return parts;
+  }
+
+  function withTrailingSlash(path) {
+    return path.endsWith("/") ? path : path + "/";
+  }
+
+  function go(to) {
+    localStorage.setItem("lang", to);
+
+    const parts = stripLeadingLang(window.location.pathname);
+    const rest = parts.length ? parts.join("/") : "";
+
+    // fr has no prefix
+    const prefix = (to === "fr") ? "" : to;
+
+    let next = "/" + [prefix, rest].filter(Boolean).join("/");
+    if (!next.endsWith("/")) next += "/";
+    window.location.href = next;
+  }
+  function openMenu() {
+    if (!btn) return;
+    btn.setAttribute("aria-expanded", "true");
+    wrap?.classList.add("is-open");
+    const active = menu?.querySelector(".langdd-item.is-active");
+    (active || menu?.querySelector(".langdd-item"))?.focus?.();
+  }
+
+  function closeMenu() {
+    if (!btn) return;
+    btn.setAttribute("aria-expanded", "false");
+    wrap?.classList.remove("is-open");
+  }
+
+  btn?.addEventListener("click", () => {
+    const isOpen = wrap?.classList.contains("is-open");
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  menu?.addEventListener("click", (e) => {
+    const target = e.target?.closest?.("[data-lang]");
+    const to = target?.getAttribute?.("data-lang");
+    if (!to) return;
+    closeMenu();
+    go(to);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!wrap) return;
+    if (!wrap.contains(e.target)) closeMenu();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!wrap?.classList.contains("is-open")) return;
+
+    if (e.key === "Escape") {
+      closeMenu();
+      btn?.focus?.();
+      return;
+    }
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      const items = Array.from(menu.querySelectorAll(".langdd-item"));
+      const current = document.activeElement;
+      const idx = Math.max(0, items.indexOf(current));
+      const next = e.key === "ArrowDown"
+        ? items[Math.min(items.length - 1, idx + 1)]
+        : items[Math.max(0, idx - 1)];
+      next?.focus?.();
+      return;
+    }
+
+    if (e.key === "Enter") {
+      const current = document.activeElement;
+      const to = current?.getAttribute?.("data-lang");
+      if (to) {
+        closeMenu();
+        go(to);
+      }
+    }
   });
 </script>
-
-<style>
-  .lang{
-    border:1px solid var(--border);
-    background: var(--card);
-    border-radius: 999px;
-    padding: 10px 12px;
-    color: var(--text);
-  }
-</style>

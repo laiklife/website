@@ -1,17 +1,10 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { t } from "../../i18n/i18n";
-import { getLangPaths } from "../../i18n/routes";
-import type { Lang } from "../../data/site";
+import AboutPage from "../_shared/AboutPage.astro";
+import { getLangPaths, langFromPathname } from "../../i18n/routes";
 
-export const getStaticPaths = () => getLangPaths();
-import { SITE } from "../../data/site";
-const lang = ((Astro.params?.lang as Lang) ?? SITE.defaultLang);
+export const getStaticPaths = getLangPaths;
+export const prerender = true;
+
+const lang = langFromPathname(Astro.url.pathname);
 ---
-
-<BaseLayout lang={lang} title={t(lang, "nav.about")}>
-  <section class="hero" data-reveal>
-    <h1 class="h1">{t(lang, "about.title")}</h1>
-    <p class="p">{t(lang, "about.body")}</p>
-  </section>
-</BaseLayout>
+<AboutPage lang={lang} />

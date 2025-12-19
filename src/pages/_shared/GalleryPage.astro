@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import type { Lang } from "../../data/site";
+import { PHOTOS, TAGS } from "../../data/photos";
+
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<BaseLayout lang={lang} title={t(lang, "nav.gallery")}>
+  <section class="hero reveal">
+    <h1 class="h1">{t(lang, "gallery.title")}</h1>
+    <p class="p">{t(lang, "gallery.subtitle")}</p>
+  </section>
+
+  <div class="filters reveal">
+    <button class="chip is-active" data-tag="__all">{t(lang, "gallery.filter.all")}</button>
+    {TAGS.map((tag) => <button class="chip" data-tag={tag}>{tag}</button>)}
+  </div>
+
+  <section class="masonry reveal" id="masonry">
+    {PHOTOS.map((p, idx) => (
+      <figure class="tile" data-tags={p.tags.join(",")} data-index={idx}>
+        <img loading="lazy" src={p.src} alt={p.alt} />
+      </figure>
+    ))}
+  </section>
+
+  <dialog class="lightbox" id="lightbox">
+    <button class="lb-close" aria-label="Close">×</button>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <img class="lb-img" alt="" />
+    <button class="lb-next" aria-label="Next">›</button>
+  </dialog>
+
+  <script>
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const tiles = Array.from(document.querySelectorAll(".tile"));
+    const dlg = document.getElementById("lightbox");
+    const img = dlg.querySelector(".lb-img");
+    const closeBtn = dlg.querySelector(".lb-close");
+    const prevBtn = dlg.querySelector(".lb-prev");
+    const nextBtn = dlg.querySelector(".lb-next");
+
+    let visible = tiles;
+    let currentIndex = 0;
+
+    function setActive(tag){
+      chips.forEach(c => c.classList.toggle("is-active", c.dataset.tag === tag));
+      tiles.forEach(t => {
+        const tags = (t.dataset.tags || "").split(",").map(s => s.trim());
+        const show = tag === "__all" || tags.includes(tag);
+        t.style.display = show ? "" : "none";
+      });
+      visible = tiles.filter(t => t.style.display !== "none");
+    }
+
+    chips.forEach(c => c.addEventListener("click", () => setActive(c.dataset.tag)));
+
+    function openAt(visIdx){
+      const tile = visible[visIdx];
+      if (!tile) return;
+      currentIndex = visIdx;
+      const im = tile.querySelector("img");
+      img.src = im.src;
+      img.alt = im.alt;
+      dlg.showModal();
+    }
+
+    tiles.forEach(t => t.addEventListener("click", () => {
+      const visIdx = visible.indexOf(t);
+      if (visIdx >= 0) openAt(visIdx);
+    }));
+
+    closeBtn.addEventListener("click", () => dlg.close());
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+
+    function prev(){ openAt((currentIndex - 1 + visible.length) % visible.length); }
+    function next(){ openAt((currentIndex + 1) % visible.length); }
+
+    prevBtn.addEventListener("click", prev);
+    nextBtn.addEventListener("click", next);
+
+    window.addEventListener("keydown", (e) => {
+      if (!dlg.open) return;
+      if (e.key === "Escape") dlg.close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    });
+
+    setActive("__all");
+  </script>
+</BaseLayout>
