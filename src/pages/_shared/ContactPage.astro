@@ -1,4 +1,5 @@
 ---
+import "../../styles/contact.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t } from "../../i18n/i18n";
 import { SITE, type Lang } from "../../data/site";
@@ -12,36 +13,73 @@ const { lang } = Astro.props as { lang: Lang };
     <p class="p">{t(lang, "contact.subtitle")}</p>
   </section>
 
-  <section class="card reveal" style="padding:18px;">
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="contact" />
-      <p style="display:none;">
-        <label>Don’t fill this out: <input name="bot-field" /></label>
-      </p>
-
-      <div class="field">
-        <label>{t(lang, "contact.name")}</label>
-        <input name="name" required />
+  <section class="card reveal contact-card">
+    <div class="contact-shell">
+      <div class="contact-head">
+        <h2 class="contact-kicker">{t(lang, "contact.formTitle")}</h2>
       </div>
 
-      <div class="field">
-        <label>{t(lang, "contact.email")}</label>
-        <input name="email" type="email" required />
-      </div>
+      <form
+        class="contact-form"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
 
-      <div class="field">
-        <label>{t(lang, "contact.message")}</label>
-        <textarea name="message" rows="6" required></textarea>
-      </div>
+        <p class="sr-only">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </p>
 
-      <button class="btn" type="submit">{t(lang, "contact.send")}</button>
-    </form>
+        <div class="contact-grid">
+          <div class="field">
+            <label for="name">{t(lang, "contact.name")}</label>
+            <input
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              placeholder={t(lang, "contact.name")}
+            />
+          </div>
 
-    <p class="p" style="margin-top:14px;">
-      {t(lang, "contact.preferEmail")}
-      <a href={`mailto:${SITE.email}`} style="text-decoration:underline;">
-        {SITE.email}
-      </a>
-    </p>
+          <div class="field">
+            <label for="email">{t(lang, "contact.email")}</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="name@email.com"
+            />
+          </div>
+
+          <div class="field field-full">
+            <label for="message">{t(lang, "contact.message")}</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="7"
+              required
+              placeholder={t(lang, "contact.message")}
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="contact-footer">
+          <p class="contact-note">
+            {t(lang, "contact.preferEmail")}
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </p>
+
+          <button class="btn contact-submit" type="submit">
+            {t(lang, "contact.send")}
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
   </section>
 </BaseLayout>

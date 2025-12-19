@@ -20,6 +20,7 @@
   "contact.email": "Email",
   "contact.message": "Message",
   "contact.send": "Send",
+  "contact.formTitle": "Send a message",
 
   "home.selectedWork.title": "Selected work",
   "home.selectedWork.body": "Add 3–6 highlight images here later (hero grid).",
