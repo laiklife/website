@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "Laiklife",
+  name: "LaikLife",
   domain: "laiklife.fr",
   email: "hello@laiklife.fr",
   defaultLang: "fr",
