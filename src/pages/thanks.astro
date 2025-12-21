@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { t } from "../i18n/i18n";
+const lang = "fr";
+---
+<BaseLayout lang={lang} title="Merci">
+  <section class="hero reveal">
+    <h1 class="h1">{t(lang, "contact.thanksTitle")}</h1>
+    <p class="p">{t(lang, "contact.thanksBody")}</p>
+  </section>
+</BaseLayout>

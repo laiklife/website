@@ -21,6 +21,8 @@
   "contact.message": "Message",
   "contact.send": "Send",
   "contact.formTitle": "Send a message",
+  "contact.thanksTitle": "Thank you!",
+  "contact.thanksBody": "Your message has been sent. I’ll get back to you as soon as possible.",
 
   "home.selectedWork.title": "Selected work",
   "home.selectedWork.body": "Add 3–6 highlight images here later (hero grid).",
@@ -30,6 +32,7 @@
   "contact.preferEmail": "Prefer email?",
 
   "footer.imprint": "Imprint",
+  "footer.contact": "Contact",
   "footer.instagram": "Instagram",
 
   "imprint.title": "Imprint",

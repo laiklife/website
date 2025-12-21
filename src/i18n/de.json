@@ -21,6 +21,8 @@
   "contact.message": "Nachricht",
   "contact.send": "Senden",
   "contact.formTitle": "Schreib mir",
+  "contact.thanksTitle": "Danke!",
+  "contact.thanksBody": "Deine Nachricht wurde gesendet. Ich melde mich so schnell wie möglich.",
 
   "home.selectedWork.title": "Auswahl",
   "home.selectedWork.body": "Füge später 3–6 Highlight-Bilder hinzu.",
@@ -30,6 +32,7 @@
   "contact.preferEmail": "Lieber per E-Mail?",
 
   "footer.imprint": "Impressum",
+  "footer.contact": "Kontakt",
   "footer.instagram": "Instagram",
 
   "imprint.title": "Impressum",
