@@ -76,3 +76,24 @@
 .lb-close{ top: 12px; right: 12px; font-size: 22px; }
 .lb-prev{ left: 12px; top: 50%; transform: translateY(-50%); font-size: 26px; }
 .lb-next{ right: 12px; top: 50%; transform: translateY(-50%); font-size: 26px; }
+
+/* Featured grid on Home */
+.featured-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 960px){
+  .featured-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px){
+  .featured-grid{ grid-template-columns: 1fr; }
+}
+
+.featured-link{ display: block; }
+
+.featured-tile{
+  margin: 0;              /* wichtig: tile hat sonst margin-bottom aus masonry */
+  cursor: pointer;
+}

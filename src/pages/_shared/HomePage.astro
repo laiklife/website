@@ -3,34 +3,84 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t } from "../../i18n/i18n";
 import { basePath } from "../../i18n/routes";
 import type { Lang } from "../../data/site";
+import { client, urlFor } from "../../lib/sanity";
 
 const { lang } = Astro.props as { lang: Lang };
 const base = basePath(lang);
+
+const featuredRaw = await client.fetch(`
+  *[_type == "photo" && featured == true] | order(order asc, _createdAt desc)[0..5]{
+    _id,
+    title,
+    alt,
+    image
+  }
+`);
+
+const FEATURED = (featuredRaw ?? [])
+  .filter((p: any) => p?.image)
+  .map((p: any) => ({
+    src: urlFor(p.image).width(1400).auto("format").quality(80).url(),
+    alt: p.alt || p.title || "Photo",
+  }));
 ---
 
 <BaseLayout lang={lang} title={t(lang, "nav.home")}>
   <section class="hero reveal">
     <h1 class="h1">{t(lang, "home.title")}</h1>
     <p class="p">{t(lang, "home.subtitle")}</p>
-    <div>
+    <div class="hero-actions">
       <a class="btn" href={`${base}/gallery/`}>{t(lang, "home.cta")} →</a>
+      <a class="btn btn-ghost" href={`${base}/contact/`}>{t(lang, "nav.contact")} →</a>
     </div>
   </section>
 
   <section class="grid2" style="margin-top: 18px;">
     <div class="card col7 pad reveal">
-      <div style="padding:18px;">
-        <h2 style="margin:0 0 8px; letter-spacing:-0.02em;">
-          {t(lang, "home.selectedWork.title")}
-        </h2>
-        <p class="p">{t(lang, "home.selectedWork.body")}</p>
+      <div class="home-card">
+        <div class="home-cardhead">
+          <div>
+            <div class="kicker">{t(lang, "home.selectedWork.title")}</div>
+            <h2 class="h2">{t(lang, "gallery.title")}</h2>
+          </div>
+
+          <a class="linkpill" href={`${base}/gallery/`}>
+            {t(lang, "home.cta")} →
+          </a>
+        </div>
+
+        {/* ✅ Platzhaltertext entfernt: kein home.selectedWork.body mehr */}
+        {FEATURED.length > 0 ? (
+          <div class="featured-grid">
+            {FEATURED.map((p) => (
+              <a href={`${base}/gallery/`} class="featured-link" aria-label="Open gallery">
+                <figure class="featured-tile">
+                  <img loading="lazy" src={p.src} alt={p.alt} />
+                </figure>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="p" style="margin-top: 10px;">
+            {t(lang, "home.cta")}
+          </p>
+        )}
       </div>
     </div>
+
     <div class="card col5 pad reveal">
-      <div style="padding:18px;">
-        <h2 style="margin:0 0 8px; letter-spacing:-0.02em;">
-          {t(lang, "home.fastContact.title")}
-        </h2>
+      <div class="home-card">
+        <div class="home-cardhead">
+          <div>
+            <div class="kicker">{t(lang, "home.fastContact.title")}</div>
+            <h2 class="h2">{t(lang, "contact.title")}</h2>
+          </div>
+
+          <a class="linkpill" href={`${base}/contact/`}>
+            {t(lang, "nav.contact")} →
+          </a>
+        </div>
+
         <p class="p">{t(lang, "home.fastContact.body")}</p>
       </div>
     </div>
