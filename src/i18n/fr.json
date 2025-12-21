@@ -21,8 +21,11 @@
   "contact.message": "Message",
   "contact.send": "Envoyer",
   "contact.formTitle": "Écris-moi",
-  "contact.thanksTitle": "Merci !",
-  "contact.thanksBody": "Ton message a bien été envoyé. Je te répondrai dès que possible.",
+
+  "thanks.title": "Merci !",
+  "thanks.body": "Ton message a bien été envoyé. Je te répondrai dès que possible.",
+  "thanks.ctaHome": "Retour à l’accueil",
+  "thanks.ctaGallery": "Voir la galerie",
 
   "home.selectedWork.title": "Sélection",
   "home.selectedWork.body": "Ajoute 3–6 images mises en avant ici.",

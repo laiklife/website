@@ -1,6 +1,5 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { t } from "../../i18n/i18n";
+import ThanksPage from "../_shared/ThanksPage.astro";
 import { getLangPaths, langFromPathname } from "../../i18n/routes";
 
 export const getStaticPaths = getLangPaths;
@@ -8,9 +7,4 @@ export const prerender = true;
 
 const lang = langFromPathname(Astro.url.pathname);
 ---
-<BaseLayout lang={lang} title={t(lang, "contact.thanksTitle")}>
-  <section class="hero reveal">
-    <h1 class="h1">{t(lang, "contact.thanksTitle")}</h1>
-    <p class="p">{t(lang, "contact.thanksBody")}</p>
-  </section>
-</BaseLayout>
+<ThanksPage lang={lang} />

@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t } from "../../i18n/i18n";
+import { basePath } from "../../i18n/routes";
+import type { Lang } from "../../data/site";
+
+const { lang } = Astro.props as { lang: Lang };
+const base = basePath(lang);
+---
+
+<BaseLayout lang={lang} title={t(lang, "thanks.title")}>
+  <section class="hero reveal" style="max-width:720px;margin:0 auto;">
+    <div class="card" style="padding:22px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+        <span aria-hidden="true" style="font-size:22px;">✅</span>
+        <h1 class="h1" style="margin:0;">{t(lang, "thanks.title")}</h1>
+      </div>
+
+      <p class="p" style="margin:0 0 16px;">{t(lang, "thanks.body")}</p>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="btn" href={`${base}/`}>{t(lang, "thanks.ctaHome")} →</a>
+        <a class="btn" href={`${base}/gallery/`}>{t(lang, "thanks.ctaGallery")} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

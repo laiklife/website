@@ -21,8 +21,11 @@
   "contact.message": "Message",
   "contact.send": "Send",
   "contact.formTitle": "Send a message",
-  "contact.thanksTitle": "Thank you!",
-  "contact.thanksBody": "Your message has been sent. I’ll get back to you as soon as possible.",
+
+  "thanks.title": "Thank you!",
+  "thanks.body": "Your message has been sent. I’ll get back to you as soon as possible.",
+  "thanks.ctaHome": "Back to home",
+  "thanks.ctaGallery": "View gallery",
 
   "home.selectedWork.title": "Selected work",
   "home.selectedWork.body": "Add 3–6 highlight images here later (hero grid).",
