@@ -1,22 +1,27 @@
-export default async (req: Request) => {
-  if (req.method !== "POST") {
-    return new Response("Method Not Allowed", { status: 405 });
+type Payload = { email?: string; name?: string; lang?: string };
+
+export const handler = async (event: any) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   const FROM = process.env.RESEND_FROM;
 
   if (!RESEND_API_KEY || !FROM) {
-    return new Response("Missing RESEND env vars", { status: 500 });
+    return { statusCode: 500, body: "Missing RESEND env vars" };
   }
 
-  const body = await req.json().catch(() => null);
-  // Erwartet: { email, name, lang }
-  const email = body?.email;
-  const name = body?.name || "";
-  const lang = body?.lang || "fr";
+  let body: Payload = {};
+  try {
+    body = JSON.parse(event.body || "{}");
+  } catch {}
 
-  if (!email) return new Response("Missing email", { status: 400 });
+  const email = body.email;
+  const name = body.name || "";
+  const lang = body.lang || "fr";
+
+  if (!email) return { statusCode: 400, body: "Missing email" };
 
   const subjects: Record<string, string> = {
     fr: "Merci pour ton message – Laiklife",
@@ -25,9 +30,9 @@ export default async (req: Request) => {
   };
 
   const lines: Record<string, string> = {
-    fr: `Bonjour ${name || ""}\n\nMerci pour ton message. Je te répondrai dès que possible.\n\n— Laiklife`,
-    en: `Hi ${name || ""}\n\nThanks for your message. I’ll get back to you as soon as possible.\n\n— Laiklife`,
-    de: `Hi ${name || ""}\n\nDanke für deine Nachricht. Ich melde mich so schnell wie möglich.\n\n— Laiklife`,
+    fr: `Bonjour ${name}\n\nMerci pour ton message. Je te répondrai dès que possible.\n\n— Laiklife`,
+    en: `Hi ${name}\n\nThanks for your message. I’ll get back to you as soon as possible.\n\n— Laiklife`,
+    de: `Hi ${name}\n\nDanke für deine Nachricht. Ich melde mich so schnell wie möglich.\n\n— Laiklife`,
   };
 
   const payload = {
@@ -48,8 +53,8 @@ export default async (req: Request) => {
 
   if (!r.ok) {
     const err = await r.text().catch(() => "");
-    return new Response(`Resend error: ${err}`, { status: 500 });
+    return { statusCode: 500, body: `Resend error: ${err}` };
   }
 
-  return new Response("OK", { status: 200 });
+  return { statusCode: 200, body: "OK" };
 };

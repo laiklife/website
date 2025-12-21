@@ -28,11 +28,10 @@ const { lang } = Astro.props as { lang: Lang };
         netlify-honeypot="bot-field"
         data-netlify-recaptcha="true"
       >
-        <!-- Netlify needs this -->
         <input type="hidden" name="form-name" value="contact" />
         <input type="hidden" name="lang" value={lang} />
 
-        <!-- Honeypot (must be real hidden HTML, not just CSS) -->
+        <!-- Honeypot: must be really hidden in HTML -->
         <p hidden>
           <label>
             Don’t fill this out:
@@ -96,7 +95,7 @@ const { lang } = Astro.props as { lang: Lang };
     </div>
   </section>
 
-  <!-- Autoresponder trigger (doesn't block the normal Netlify submit) -->
+  <!-- Autoresponder trigger (fire-and-forget, survives redirect) -->
   <script type="module">
     document.addEventListener("submit", (e) => {
       const form = e.target;
@@ -114,6 +113,7 @@ const { lang } = Astro.props as { lang: Lang };
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        keepalive: true,
       }).catch(() => {});
     });
   </script>
