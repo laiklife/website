@@ -24,13 +24,20 @@ const { lang } = Astro.props as { lang: Lang };
         name="contact"
         method="POST"
         action="/thanks/"
-        data-netlify="true"
+        netlify
         netlify-honeypot="bot-field"
+        data-netlify-recaptcha="true"
       >
+        <!-- Netlify needs this -->
         <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="lang" value={lang} />
 
-        <p class="sr-only">
-          <label>Don’t fill this out: <input name="bot-field" /></label>
+        <!-- Honeypot (must be real hidden HTML, not just CSS) -->
+        <p hidden>
+          <label>
+            Don’t fill this out:
+            <input name="bot-field" />
+          </label>
         </p>
 
         <div class="contact-grid">
@@ -67,6 +74,11 @@ const { lang } = Astro.props as { lang: Lang };
               placeholder={t(lang, "contact.message")}
             ></textarea>
           </div>
+
+          <!-- Netlify reCAPTCHA -->
+          <div class="field field-full">
+            <div data-netlify-recaptcha="true"></div>
+          </div>
         </div>
 
         <div class="contact-footer">
@@ -83,4 +95,26 @@ const { lang } = Astro.props as { lang: Lang };
       </form>
     </div>
   </section>
+
+  <!-- Autoresponder trigger (doesn't block the normal Netlify submit) -->
+  <script type="module">
+    document.addEventListener("submit", (e) => {
+      const form = e.target;
+      if (!(form instanceof HTMLFormElement)) return;
+      if (form.getAttribute("name") !== "contact") return;
+
+      const fd = new FormData(form);
+      const payload = {
+        email: fd.get("email"),
+        name: fd.get("name"),
+        lang: fd.get("lang") || "fr",
+      };
+
+      fetch("/.netlify/functions/autoresponder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }).catch(() => {});
+    });
+  </script>
 </BaseLayout>
