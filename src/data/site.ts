@@ -1,7 +1,7 @@
 export const SITE = {
-  name: "Laiklife Photography",
+  name: "Laiklife",
   domain: "laiklife.fr",
-  email: "hello@laiklife.fr", // <- ändern
+  email: "hello@laiklife.fr",
   defaultLang: "fr",
   languages: ["fr", "en", "de"] as const,
   social: {
