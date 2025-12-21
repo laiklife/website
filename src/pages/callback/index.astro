@@ -1,0 +1,6 @@
+---
+const sid = Astro.url.searchParams.get("sid") ?? "";
+const url = Astro.url.searchParams.get("url") ?? "";
+// Sanity CLI expects the browser to hit this endpoint; just forward querystring.
+return Astro.redirect(`/callback/?sid=${encodeURIComponent(sid)}&url=${encodeURIComponent(url)}`, 302);
+---

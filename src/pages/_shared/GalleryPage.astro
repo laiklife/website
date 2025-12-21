@@ -2,9 +2,32 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t } from "../../i18n/i18n";
 import type { Lang } from "../../data/site";
-import { PHOTOS, TAGS } from "../../data/photos";
+import { client, urlFor } from "../../lib/sanity";
 
 const { lang } = Astro.props as { lang: Lang };
+
+const photosRaw = await client.fetch(`
+  *[_type == "photo"] | order(order asc, _createdAt desc){
+    _id,
+    title,
+    alt,
+    tags,
+    image
+  }
+`);
+
+const PHOTOS = photosRaw
+  .filter((p: any) => p?.image)
+  .map((p: any) => ({
+    // Für Grid/Lightbox: eine brauchbare Größe + WebP
+    src: urlFor(p.image).width(1400).auto("format").quality(80).url(),
+    alt: p.alt || p.title || "Photo",
+    tags: Array.isArray(p.tags) ? p.tags : [],
+  }));
+
+const TAGS = Array.from(new Set(PHOTOS.flatMap((p) => p.tags))).sort((a, b) =>
+  a.localeCompare(b, undefined, { sensitivity: "base" })
+);
 ---
 
 <BaseLayout lang={lang} title={t(lang, "nav.gallery")}>
@@ -48,7 +71,7 @@ const { lang } = Astro.props as { lang: Lang };
     function setActive(tag){
       chips.forEach(c => c.classList.toggle("is-active", c.dataset.tag === tag));
       tiles.forEach(t => {
-        const tags = (t.dataset.tags || "").split(",").map(s => s.trim());
+        const tags = (t.dataset.tags || "").split(",").map(s => s.trim()).filter(Boolean);
         const show = tag === "__all" || tags.includes(tag);
         t.style.display = show ? "" : "none";
       });
