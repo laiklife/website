@@ -105,9 +105,6 @@
 @media (max-width: 960px){
   .featured-grid{ grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 620px){
-  .featured-grid{ grid-template-columns: 1fr; }
-}
 
 .featured-link{ display: block; }
 
@@ -130,4 +127,77 @@
   height: 170px;
   object-fit: cover;
   display: block;
+}
+
+/* Home contact card */
+.home-contact .p{ margin-top: 2px; }
+
+.contact-list{
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.contact-item{
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--card) 75%, transparent);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.contact-item:hover{
+  transform: translateY(-1px);
+  background: rgba(99, 102, 241, 0.08);
+  border-color: color-mix(in srgb, var(--border), var(--text) 10%);
+}
+
+.contact-icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 60%, var(--card) 40%);
+  color: var(--muted);
+}
+
+.contact-item:hover .contact-icon{
+  color: var(--text);
+}
+
+.contact-text{
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contact-label{
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.contact-value{
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-cta{
+  margin-top: 6px;
+  display: flex;
+}
+
+.contact-btn{
+  width: 100%;
+  justify-content: center;
 }
