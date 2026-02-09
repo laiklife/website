@@ -5,12 +5,11 @@ import Footer from "../components/Footer.astro";
 import { SITE, type Lang } from "../data/site";
 
 // ✅ NEU:
-import clientScriptUrl from "../scripts/client.ts?url";
 
 const { lang, title } = Astro.props as { lang: Lang; title: string };
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
@@ -19,6 +18,15 @@ const { lang, title } = Astro.props as { lang: Lang; title: string };
     <meta name="description" content="Photography portfolio" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <script is:inline>
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (stored === "dark" || (!stored && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body>
     <Navbar lang={lang} />
@@ -27,7 +35,6 @@ const { lang, title } = Astro.props as { lang: Lang; title: string };
     </main>
     <Footer lang={lang} />
 
-    <!-- ✅ so wird client.ts wirklich im Browser geladen -->
-    <script type="module" src={clientScriptUrl}></script>
+    <script src="../scripts/client.ts"></script>
   </body>
 </html>
